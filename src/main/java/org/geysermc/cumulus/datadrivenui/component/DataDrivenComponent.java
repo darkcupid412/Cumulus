@@ -48,7 +48,8 @@ public interface DataDrivenComponent {
     TOGGLE,
     SLIDER,
     DROPDOWN,
-    BUTTON
+    BUTTON,
+    IMAGE
   }
 
   /**

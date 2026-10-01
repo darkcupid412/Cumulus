@@ -32,6 +32,8 @@ public final class DataDrivenFormImpl implements DataDrivenForm {
   private static final DisplayOptions DISPLAY_DEFAULTS = DisplayOptions.options();
   private static final InputOptions INPUT_DEFAULTS = InputOptions.options();
   private static final ButtonOptions BUTTON_DEFAULTS = ButtonOptions.options();
+  private static final org.geysermc.cumulus.datadrivenui.component.ImageOptions IMAGE_DEFAULTS =
+      org.geysermc.cumulus.datadrivenui.component.ImageOptions.options();
   private static final SliderOptions SLIDER_DEFAULTS = SliderOptions.options();
 
   private final Value<Text> title;
@@ -267,6 +269,21 @@ public final class DataDrivenFormImpl implements DataDrivenForm {
       return add(
           ComponentImpls.button(
               label, onClick, options.tooltip(), options.disabled(), options.visible()));
+    }
+
+    @Override
+    public DataDrivenForm.@NonNull Builder image(@NonNull String src, @NonNull String pack) {
+      return image(src, pack, IMAGE_DEFAULTS);
+    }
+
+    @Override
+    public DataDrivenForm.@NonNull Builder image(
+        @NonNull String src,
+        @NonNull String pack,
+        org.geysermc.cumulus.datadrivenui.component.@NonNull ImageOptions options) {
+      return add(
+          ComponentImpls.image(
+              src, pack, options.width(), options.onClick(), options.tooltip(), options.visible()));
     }
 
     @Override

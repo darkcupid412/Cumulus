@@ -12,6 +12,7 @@ import java.util.Objects;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.geysermc.cumulus.datadrivenui.component.Button;
+import org.geysermc.cumulus.datadrivenui.component.Image;
 import org.geysermc.cumulus.datadrivenui.component.DataDrivenComponent;
 import org.geysermc.cumulus.datadrivenui.component.Dropdown;
 import org.geysermc.cumulus.datadrivenui.component.Slider;
@@ -135,6 +136,16 @@ public final class ComponentImpls {
       Value<Boolean> disabled,
       Value<Boolean> visible) {
     return new ButtonImpl(label, onClick, tooltip, disabled, visible);
+  }
+
+  public static Image image(
+      String src,
+      String pack,
+      @Nullable Value<Double> width,
+      @Nullable Runnable onClick,
+      @Nullable Value<Text> tooltip,
+      Value<Boolean> visible) {
+    return new ImageImpl(src, pack, width, onClick, tooltip, visible);
   }
 
   private static boolean hasItemValue(List<Dropdown.Item> items, double value) {
@@ -350,6 +361,54 @@ public final class ComponentImpls {
     @Override
     public String toString() {
       return "Item(" + label + "=" + value + ")";
+    }
+  }
+
+  static final class ImageImpl extends BaseImpl implements Image {
+    private final String src;
+    private final String pack;
+    private final @Nullable Value<Double> width;
+    private final @Nullable Runnable onClick;
+    private final @Nullable Value<Text> tooltip;
+
+    ImageImpl(
+        String src,
+        String pack,
+        @Nullable Value<Double> width,
+        @Nullable Runnable onClick,
+        @Nullable Value<Text> tooltip,
+        Value<Boolean> visible) {
+      super(Kind.IMAGE, visible);
+      this.src = Objects.requireNonNull(src, "src");
+      this.pack = Objects.requireNonNull(pack, "pack");
+      this.width = width;
+      this.onClick = onClick;
+      this.tooltip = tooltip;
+    }
+
+    @Override
+    public @NonNull String src() {
+      return src;
+    }
+
+    @Override
+    public @NonNull String pack() {
+      return pack;
+    }
+
+    @Override
+    public @Nullable Value<Double> width() {
+      return width;
+    }
+
+    @Override
+    public @Nullable Runnable onClick() {
+      return onClick;
+    }
+
+    @Override
+    public @Nullable Value<Text> tooltip() {
+      return tooltip;
     }
   }
 

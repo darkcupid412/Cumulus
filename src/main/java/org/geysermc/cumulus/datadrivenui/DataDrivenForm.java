@@ -13,6 +13,7 @@ import org.checkerframework.common.returnsreceiver.qual.This;
 import org.geysermc.cumulus.datadrivenui.component.ButtonOptions;
 import org.geysermc.cumulus.datadrivenui.component.DataDrivenComponent;
 import org.geysermc.cumulus.datadrivenui.component.DisplayOptions;
+import org.geysermc.cumulus.datadrivenui.component.ImageOptions;
 import org.geysermc.cumulus.datadrivenui.component.Dropdown;
 import org.geysermc.cumulus.datadrivenui.component.InputOptions;
 import org.geysermc.cumulus.datadrivenui.component.SliderOptions;
@@ -191,6 +192,19 @@ public interface DataDrivenForm {
     /** Adds a button. */
     @This @NonNull Builder button(
         @NonNull Value<Text> label, @NonNull Runnable onClick, @NonNull ButtonOptions options);
+
+    /**
+     * Adds a picture read from a resource pack. {@code src} is the pack-relative texture path
+     * without its extension; {@code pack} is the pack's manifest UUID.
+     *
+     * <p>Give it an {@link ImageOptions#onClick(Runnable)} to make it behave as a button that is
+     * drawn as a picture - which is the only way to put artwork on a pressable thing here.
+     */
+    @This @NonNull Builder image(@NonNull String src, @NonNull String pack);
+
+    /** Adds a picture read from a resource pack. */
+    @This @NonNull Builder image(
+        @NonNull String src, @NonNull String pack, @NonNull ImageOptions options);
 
     /**
      * Gives the form a close button at the bottom. Its label is supplied by the client, in the
